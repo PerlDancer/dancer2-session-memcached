@@ -49,7 +49,7 @@ sub _build__memcached {
     croak "The setting memcached_servers must be defined"
       unless defined $servers;
 
-    $servers = [ split /,/, $servers ];
+    $servers = [ split /,\s*/, $servers ];
 
     # make sure the servers look good
     foreach my $s (@$servers) {
