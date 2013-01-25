@@ -42,6 +42,7 @@ has _memcached => (
     },
 );
 
+# Adapted from Dancer::Session::Memcached
 sub _build__memcached {
     my ($self) = @_;
 
