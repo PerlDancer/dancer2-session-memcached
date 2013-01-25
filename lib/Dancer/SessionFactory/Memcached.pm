@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 package Dancer::SessionFactory::Memcached;
-# ABSTRACT: Dancer 2 session storage with Memcached
+# ABSTRACT: Dancer 2 session storage with Cache::Memcached
 # VERSION
 
 use Carp;
@@ -15,9 +15,10 @@ use Dancer::Core::Types;
 # Public attributes
 #--------------------------------------------------------------------------#
 
-=attr database_name (required)
+=attr memcached_servers (required)
 
-Name of the database to hold the sessions collection.
+A comma-separated list of reachable memcached servers (can be either
+address:port or socket paths).
 
 =cut
 
@@ -88,12 +89,12 @@ sub _sessions {
   engines:
     session:
       Memcached:
-        memcached_servers: "10.0.1.31:11211,10.0.1.32:11211,/var/sock/memcached
+        memcached_servers: 10.0.1.31:11211,10.0.1.32:11211,/var/sock/memcached
 
 =head1 DESCRIPTION
 
 This module implements a session factory for Dancer 2 that stores session
-state within Memcached.
+state within Memcached using L<Cache::Memcached>.
 
 =cut
 
