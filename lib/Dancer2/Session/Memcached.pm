@@ -2,14 +2,14 @@ use 5.008001;
 use strict;
 use warnings;
 
-package Dancer::SessionFactory::Memcached;
+package Dancer2::Session::Memcached;
 # ABSTRACT: Dancer 2 session storage with Cache::Memcached
 # VERSION
 
 use Carp;
 use Moo;
 use Cache::Memcached;
-use Dancer::Core::Types;
+use Dancer2::Core::Types;
 
 #--------------------------------------------------------------------------#
 # Public attributes
@@ -67,7 +67,7 @@ sub _build__memcached {
 # Role composition
 #--------------------------------------------------------------------------#
 
-with 'Dancer::Core::Role::SessionFactory';
+with 'Dancer2::Core::Role::SessionFactory';
 
 # _retrieve, _flush, _destroy handled by _memcached object
 

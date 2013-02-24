@@ -2,11 +2,11 @@
 
 =head1 NAME
 
-Dancer::SessionFactory::Memcached - Dancer 2 session storage with Cache::Memcached
+Dancer2::Session::Memcached - Dancer 2 session storage with Cache::Memcached
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -39,7 +39,7 @@ address:port or socket paths).
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<https://github.com/dagolden/dancer-sessionfactory-memcached/issues>.
+at L<https://github.com/dagolden/dancer2-session-memcached/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -47,9 +47,9 @@ You will be notified automatically of any progress on your issue.
 This is open source software.  The code repository is available for
 public review and contribution under the terms of the license.
 
-L<https://github.com/dagolden/dancer-sessionfactory-memcached>
+L<https://github.com/dagolden/dancer2-session-memcached>
 
-  git clone git://github.com/dagolden/dancer-sessionfactory-memcached.git
+  git clone git://github.com/dagolden/dancer2-session-memcached.git
 
 =head1 AUTHOR
 

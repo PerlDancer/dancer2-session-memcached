@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "Dancer-SessionFactory-Memcached",
+   "name" : "Dancer2-Session-Memcached",
    "no_index" : {
       "directory" : [
          "t",
@@ -42,9 +42,9 @@
          "requires" : {
             "Cache::Memcached" : "0",
             "Carp" : "0",
-            "Dancer" : "1.999999",
-            "Dancer::Core::Role::SessionFactory" : "0",
-            "Dancer::Core::Types" : "0",
+            "Dancer" : "2",
+            "Dancer2::Core::Role::SessionFactory" : "0",
+            "Dancer2::Core::Types" : "0",
             "Moo" : "0",
             "perl" : "5.008001",
             "strict" : "0",
@@ -53,35 +53,38 @@
       },
       "test" : {
          "requires" : {
-            "Dancer" : "0",
+            "Dancer2" : "0",
+            "ExtUtils::MakeMaker" : "0",
             "File::Find" : "0",
+            "File::Spec::Functions" : "0",
             "File::Temp" : "0.22",
             "HTTP::Date" : "0",
             "JSON" : "0",
             "LWP::UserAgent" : "0",
+            "List::Util" : "0",
             "Test::More" : "0",
             "Test::TCP" : "1.13"
          }
       }
    },
    "provides" : {
-      "Dancer::SessionFactory::Memcached" : {
-         "file" : "lib/Dancer/SessionFactory/Memcached.pm",
-         "version" : "0.001"
+      "Dancer2::Session::Memcached" : {
+         "file" : "lib/Dancer2/Session/Memcached.pm",
+         "version" : "0.002"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/dagolden/dancer-sessionfactory-memcached/issues"
+         "web" : "https://github.com/dagolden/dancer2-session-memcached/issues"
       },
-      "homepage" : "https://metacpan.org/release/Dancer-SessionFactory-Memcached",
+      "homepage" : "https://metacpan.org/release/Dancer2-Session-Memcached",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/dagolden/dancer-sessionfactory-memcached.git",
-         "web" : "https://github.com/dagolden/dancer-sessionfactory-memcached"
+         "url" : "git://github.com/dagolden/dancer2-session-memcached.git",
+         "web" : "https://github.com/dagolden/dancer2-session-memcached"
       }
    },
-   "version" : "0.001"
+   "version" : "0.002"
 }
 
