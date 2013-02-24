@@ -42,7 +42,7 @@
          "requires" : {
             "Cache::Memcached" : "0",
             "Carp" : "0",
-            "Dancer" : "2",
+            "Dancer2" : "2",
             "Dancer2::Core::Role::SessionFactory" : "0",
             "Dancer2::Core::Types" : "0",
             "Moo" : "0",
