@@ -1,0 +1,13 @@
+Revision history for Dancer2-Session-Memcached
+
+0.002     2013-02-23 22:19:08 America/New_York
+
+    - Renamed from Dancer-SessionFactory-Memcached to
+      Dancer2-Session-Memcached
+     
+    - Internals updated for new Dancer2 release
+         
+0.001     2013-01-25 17:30:45 America/New_York
+
+    - First release
+
