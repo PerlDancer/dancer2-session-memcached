@@ -56,13 +56,12 @@ Test::TCP::test_tcp(
         ok !$cookie, "no cookie set"
           or diag explain $cookie;
 
-        # empty session created if session read attempted
+        # no session created if session read attempted
         $res = $ua->get("http://127.0.0.1:$port/read_session");
         ok $res->is_success, "/read_session";
         $cookie = extract_cookie($res);
-        ok $cookie, "session cookie set"
+        ok !$cookie, "no cookie set"
           or diag explain $cookie;
-        my $sid1 = $cookie->{"dancer.session"};
         like $res->content, qr/name=''/, "empty session";
 
         # set value into session
@@ -71,6 +70,7 @@ Test::TCP::test_tcp(
         $cookie = extract_cookie($res);
         ok $cookie, "session cookie set"
           or diag explain $cookie;
+        my $sid1 = $cookie->{"dancer.session"};
 
         # read value back
         $res = $ua->get("http://127.0.0.1:$port/read_session");
@@ -143,6 +143,7 @@ Test::TCP::test_tcp(
             {
                 id   => $sid4,
                 data => { name => 'moe' },
+                is_dirty => 0,
             },
             "session dump correct"
         );
