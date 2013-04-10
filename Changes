@@ -2,6 +2,10 @@ Revision history for Dancer2-Session-Memcached
 
 {{$NEXT}}
 
+    [FIXED]
+
+    - Fixed up test bugs for latest Dancer2 session factory changes
+
 0.002     2013-02-23 22:19:08 America/New_York
 
     - Renamed from Dancer-SessionFactory-Memcached to
