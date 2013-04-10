@@ -4,7 +4,7 @@ use warnings;
 
 package Dancer2::Session::Memcached;
 # ABSTRACT: Dancer 2 session storage with Cache::Memcached
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 use Carp;
 use Moo;
@@ -81,13 +81,15 @@ __END__
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Dancer2::Session::Memcached - Dancer 2 session storage with Cache::Memcached
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 

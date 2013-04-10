@@ -34,14 +34,14 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Cache::Memcached" => 0,
     "Carp" => 0,
-    "Dancer2" => 2,
+    "Dancer2" => "0.03",
     "Dancer2::Core::Role::SessionFactory" => 0,
     "Dancer2::Core::Types" => 0,
     "Moo" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }

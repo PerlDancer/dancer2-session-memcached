@@ -17,7 +17,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300031, CPAN::Meta::Converter version 2.130880'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -34,11 +34,11 @@ no_index:
 provides:
   Dancer2::Session::Memcached:
     file: lib/Dancer2/Session/Memcached.pm
-    version: 0.002
+    version: 0.003
 requires:
   Cache::Memcached: 0
   Carp: 0
-  Dancer2: 2
+  Dancer2: 0.03
   Dancer2::Core::Role::SessionFactory: 0
   Dancer2::Core::Types: 0
   Moo: 0
@@ -49,4 +49,4 @@ resources:
   bugtracker: https://github.com/dagolden/dancer2-session-memcached/issues
   homepage: https://metacpan.org/release/Dancer2-Session-Memcached
   repository: git://github.com/dagolden/dancer2-session-memcached.git
-version: 0.002
+version: 0.003
