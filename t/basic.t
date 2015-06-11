@@ -171,12 +171,12 @@ Test::TCP::test_tcp(
 
         get '/destroy_session' => sub {
             my $name = session('name') || '';
-            context->destroy_session;
+            app->destroy_session;
             return "destroyed='$name'";
         };
 
         get '/churn_session' => sub {
-            context->destroy_session;
+            app->destroy_session;
             session name => 'damian';
             return "churned";
         };
@@ -208,7 +208,7 @@ Test::TCP::test_tcp(
             port         => $port
         );
 
-        Dancer2->runner->server->port($port);
+        Dancer2->runner->server->{'port'} = $port;
         start;
     },
 );
