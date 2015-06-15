@@ -154,6 +154,7 @@ Test::TCP::test_tcp(
         my $port = shift;
 
         use Dancer2;
+        set port => $port;
 
         get '/no_session_data' => sub {
             return "session not modified";
@@ -171,12 +172,12 @@ Test::TCP::test_tcp(
 
         get '/destroy_session' => sub {
             my $name = session('name') || '';
-            context->destroy_session;
+            app->destroy_session;
             return "destroyed='$name'";
         };
 
         get '/churn_session' => sub {
-            context->destroy_session;
+            app->destroy_session;
             session name => 'damian';
             return "churned";
         };
@@ -208,7 +209,6 @@ Test::TCP::test_tcp(
             port         => $port
         );
 
-        Dancer2->runner->server->port($port);
         start;
     },
 );
