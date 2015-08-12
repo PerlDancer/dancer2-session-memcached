@@ -137,6 +137,7 @@ sub validate_id {
           - 10.0.1.31:11211
           - 10.0.1.32:11211
           - /var/sock/memcached
+        fatal_cluster_unreachable: 0
 
 =head1 DESCRIPTION
 
