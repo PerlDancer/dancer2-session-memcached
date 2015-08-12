@@ -50,6 +50,13 @@ has memcached_servers => (
     coerce   => $Servers->coercion,
 );
 
+has fatal_cluster_unreachable => (
+    is       => 'ro',
+    isa      => Bool,
+    required => 0,
+    default  => sub { 0 },
+);
+
 #--------------------------------------------------------------------------#
 # Private attributes
 #--------------------------------------------------------------------------#
@@ -67,7 +74,27 @@ has _memcached => (
 # Adapted from Dancer::Session::Memcached
 sub _build__memcached {
     my ($self) = @_;
-    return Cache::Memcached->new( servers => $self->memcached_servers );
+
+    my $servers = $self->memcached_servers;
+
+    croak "The setting memcached_servers must be defined"
+      unless defined $servers;
+
+    $servers = [ split /,\s*/, $servers ];
+
+    # make sure the servers look good
+    foreach my $s (@$servers) {
+        if ( $s =~ /^\d+\.\d+\.\d+\.\d+$/ ) {
+            croak "server `$s' is invalid; port is missing, use `server:port'";
+        }
+    }
+
+    my $cache_engine = Cache::Memcached->new( servers => $servers );
+
+    croak "Memcache cluster unreachable"
+        if $self->fatal_cluster_unreachable && not keys %{$cache_engine->stats(['misc'])};
+
+    return $cache_engine;
 }
 
 #--------------------------------------------------------------------------#
