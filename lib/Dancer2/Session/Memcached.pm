@@ -71,6 +71,24 @@ has _memcached => (
     },
 );
 
+sub _retrieve {
+    my ($self) = shift;
+
+    croak "Memcache cluster unreachable _retrieve"
+        if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
+
+    return $self->_memcached->get( @_ );
+}
+
+sub _flush {
+    my ($self) = shift;
+
+    croak "Memcache cluster unreachable _flush"
+        if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
+
+    return $self->_memcached->set( @_ );
+}
+
 # Adapted from Dancer::Session::Memcached
 sub _build__memcached {
     my ($self) = @_;
@@ -89,12 +107,7 @@ sub _build__memcached {
         }
     }
 
-    my $cache_engine = Cache::Memcached->new( servers => $servers );
-
-    croak "Memcache cluster unreachable"
-        if $self->fatal_cluster_unreachable && not keys %{$cache_engine->stats(['misc'])};
-
-    return $cache_engine;
+    return Cache::Memcached->new( servers => $servers );
 }
 
 #--------------------------------------------------------------------------#
