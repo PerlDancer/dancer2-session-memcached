@@ -28,6 +28,13 @@ has memcached_servers => (
     required => 1,
 );
 
+has fatal_cluster_unreachable => (
+    is       => 'ro',
+    isa      => Bool,
+    required => 0,
+    default  => sub { 0 },
+);
+
 #--------------------------------------------------------------------------#
 # Private attributes
 #--------------------------------------------------------------------------#
@@ -60,7 +67,12 @@ sub _build__memcached {
         }
     }
 
-    return Cache::Memcached->new( servers => $servers );
+    my $cache_engine = Cache::Memcached->new( servers => $servers );
+
+    croak "Memcache cluster unreachable"
+        if $self->fatal_cluster_unreachable && not keys %{$cache_engine->stats(['misc'])};
+
+    return $cache_engine;
 }
 
 #--------------------------------------------------------------------------#
