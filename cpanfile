@@ -1,0 +1,52 @@
+requires "Cache::Memcached" => "0";
+requires "Carp" => "0";
+requires "Dancer2" => "0.15000";
+requires "Dancer2::Core::Role::SessionFactory" => "0";
+requires "Dancer2::Core::Types" => "0";
+requires "Moo" => "0";
+requires "perl" => "5.008001";
+requires "strict" => "0";
+requires "warnings" => "0";
+
+on 'test' => sub {
+  requires "Dancer2" => "0.15000";
+  requires "ExtUtils::MakeMaker" => "0";
+  requires "File::Spec" => "0";
+  requires "File::Temp" => "0.22";
+  requires "HTTP::Cookies" => "0";
+  requires "HTTP::Date" => "0";
+  requires "HTTP::Request::Common" => "0";
+  requires "JSON" => "0";
+  requires "Plack::Test" => "0";
+  requires "Test::More" => "0";
+  requires "perl" => "5.008001";
+};
+
+on 'test' => sub {
+  recommends "CPAN::Meta" => "2.120900";
+};
+
+on 'configure' => sub {
+  requires "ExtUtils::MakeMaker" => "6.17";
+  requires "perl" => "5.008001";
+};
+
+on 'develop' => sub {
+  requires "Dist::Zilla" => "5";
+  requires "Dist::Zilla::Plugin::Prereqs" => "0";
+  requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.035";
+  requires "English" => "0";
+  requires "File::Spec" => "0";
+  requires "File::Temp" => "0";
+  requires "IO::Handle" => "0";
+  requires "IPC::Open3" => "0";
+  requires "Pod::Coverage::TrustPod" => "0";
+  requires "Pod::Wordlist" => "0";
+  requires "Software::License::Apache_2_0" => "0";
+  requires "Test::CPAN::Meta" => "0";
+  requires "Test::More" => "0";
+  requires "Test::Pod" => "1.41";
+  requires "Test::Pod::Coverage" => "1.08";
+  requires "Test::Spelling" => "0.12";
+  requires "Test::Version" => "1";
+};

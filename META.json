@@ -1,0 +1,111 @@
+{
+   "abstract" : "Dancer 2 session storage with Cache::Memcached",
+   "author" : [
+      "David Golden <dagolden@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 5.043, CPAN::Meta::Converter version 2.150001",
+   "license" : [
+      "apache_2_0"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : 2
+   },
+   "name" : "Dancer2-Session-Memcached",
+   "no_index" : {
+      "directory" : [
+         "corpus",
+         "examples",
+         "t",
+         "xt"
+      ],
+      "package" : [
+         "DB"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.17",
+            "perl" : "5.008001"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Dist::Zilla" : "5",
+            "Dist::Zilla::Plugin::Prereqs" : "0",
+            "Dist::Zilla::PluginBundle::DAGOLDEN" : "0.035",
+            "English" : "0",
+            "File::Spec" : "0",
+            "File::Temp" : "0",
+            "IO::Handle" : "0",
+            "IPC::Open3" : "0",
+            "Pod::Coverage::TrustPod" : "0",
+            "Pod::Wordlist" : "0",
+            "Software::License::Apache_2_0" : "0",
+            "Test::CPAN::Meta" : "0",
+            "Test::More" : "0",
+            "Test::Pod" : "1.41",
+            "Test::Pod::Coverage" : "1.08",
+            "Test::Spelling" : "0.12",
+            "Test::Version" : "1"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Cache::Memcached" : "0",
+            "Carp" : "0",
+            "Dancer2" : "0.15000",
+            "Dancer2::Core::Role::SessionFactory" : "0",
+            "Dancer2::Core::Types" : "0",
+            "Moo" : "0",
+            "perl" : "5.008001",
+            "strict" : "0",
+            "warnings" : "0"
+         }
+      },
+      "test" : {
+         "recommends" : {
+            "CPAN::Meta" : "2.120900"
+         },
+         "requires" : {
+            "Dancer2" : "0.15000",
+            "ExtUtils::MakeMaker" : "0",
+            "File::Spec" : "0",
+            "File::Temp" : "0.22",
+            "HTTP::Cookies" : "0",
+            "HTTP::Date" : "0",
+            "HTTP::Request::Common" : "0",
+            "JSON" : "0",
+            "Plack::Test" : "0",
+            "Test::More" : "0",
+            "perl" : "5.008001"
+         }
+      }
+   },
+   "provides" : {
+      "Dancer2::Session::Memcached" : {
+         "file" : "lib/Dancer2/Session/Memcached.pm",
+         "version" : "0.004"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/PerlDancer/dancer2-session-memcached/issues"
+      },
+      "homepage" : "https://github.com/PerlDancer/dancer2-session-memcached",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/PerlDancer/dancer2-session-memcached.git",
+         "web" : "https://github.com/PerlDancer/dancer2-session-memcached"
+      }
+   },
+   "version" : "0.004",
+   "x_authority" : "cpan:DAGOLDEN",
+   "x_contributors" : [
+      "Peter Mottram <peter@sysnix.com>"
+   ]
+}
+

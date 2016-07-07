@@ -1,6 +1,6 @@
 Revision history for Dancer2-Session-Memcached
 
-{{$NEXT}}
+0.004     2016-07-07 12:25:49-04:00 America/Toronto
 
     - Bump Dancer2 dependency to 0.150000 (Core::Context removal)
     - Small dzil cleanup
