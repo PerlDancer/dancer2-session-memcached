@@ -5,6 +5,7 @@ use warnings;
 package Dancer2::Session::Memcached;
 # ABSTRACT: Dancer 2 session storage with Cache::Memcached
 # VERSION
+our $VERSION = '0.004';
 
 use Carp;
 use Moo;
