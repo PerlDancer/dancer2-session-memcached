@@ -78,6 +78,12 @@ sub _sessions {
     return [];
 }
 
+sub _change_id {
+    my ( $self, $old_id, $new_id ) = @_;
+    $self->_flush( $new_id, $self->_retrieve( $old_id ) );
+    $self->_destroy( $old_id );
+}
+
 1;
 
 =for Pod::Coverage method_names_here
