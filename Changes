@@ -2,6 +2,12 @@ Revision history for Dancer2-Session-Memcached
 
 {{$NEXT}}
 
+    - Bump Dancer2 dependency to 0.150000 (Core::Context removal)
+    - Small dzil cleanup
+    - Convert tests from Test::TCP to Plack::Test
+    - add _change_id method for upcoming change_session_id method in
+      Dancer2::Core::App
+
 0.003     2013-04-10 17:31:39 Europe/London
 
     [FIXED]
