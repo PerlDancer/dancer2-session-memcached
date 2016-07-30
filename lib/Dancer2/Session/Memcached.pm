@@ -29,6 +29,13 @@ has memcached_servers => (
     required => 1,
 );
 
+has fatal_cluster_unreachable => (
+    is       => 'ro',
+    isa      => Bool,
+    required => 0,
+    default  => sub { 0 },
+);
+
 #--------------------------------------------------------------------------#
 # Private attributes
 #--------------------------------------------------------------------------#
@@ -37,11 +44,27 @@ has _memcached => (
     is  => 'lazy',
     isa => InstanceOf ['Cache::Memcached'],
     handles => {
-        _retrieve => 'get',
-        _flush => 'set',
         _destroy => 'delete',
     },
 );
+
+sub _retrieve {
+    my ($self) = shift;
+
+    croak "Memcache cluster unreachable _retrieve"
+        if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
+
+    return $self->_memcached->get( @_ );
+}
+
+sub _flush {
+    my ($self) = shift;
+
+    croak "Memcache cluster unreachable _flush"
+        if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
+
+    return $self->_memcached->set( @_ );
+}
 
 # Adapted from Dancer::Session::Memcached
 sub _build__memcached {
@@ -98,6 +121,7 @@ sub _change_id {
     session:
       Memcached:
         memcached_servers: 10.0.1.31:11211,10.0.1.32:11211,/var/sock/memcached
+        fatal_cluster_unreachable: 0
 
 =head1 DESCRIPTION
 
