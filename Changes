@@ -5,6 +5,8 @@ Revision history for Dancer2-Session-Memcached
     - memcached servers can be configured as an array or a comma-separated
       list.
 
+0.004     2016-07-07
+
     - Bump Dancer2 dependency to 0.150000 (Core::Context removal)
     - Small dzil cleanup
     - Convert tests from Test::TCP to Plack::Test
