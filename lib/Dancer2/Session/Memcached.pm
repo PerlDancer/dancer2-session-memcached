@@ -1,4 +1,3 @@
-use 5.008001;
 use strict;
 use warnings;
 
@@ -7,10 +6,31 @@ package Dancer2::Session::Memcached;
 # VERSION
 our $VERSION = '0.004';
 
-use Carp;
 use Moo;
 use Cache::Memcached;
-use Dancer2::Core::Types;
+
+use Types::Standard qw/ Str ArrayRef InstanceOf /;
+
+use Type::Tiny;
+
+my $Server = Type::Tiny->new(
+    name       => 'MemcachedServer',
+    parent     => Str,
+    constraint => sub { ! /^\d+\.\d+\.\d+\.\d+$/ },
+    message    => sub {
+        "server `$_' is invalid; port is missing, use `server:port'"
+    },
+
+);
+
+my $Servers = Type::Tiny->new(
+    name     => 'MemcachedServers',
+    parent   => ArrayRef[$Server],
+    coercion => Type::Coercion->new( type_coercion_map => [
+        Str ,=> sub { [ split ',', $_ ] },
+    ]),
+);
+
 
 #--------------------------------------------------------------------------#
 # Public attributes
@@ -18,15 +38,16 @@ use Dancer2::Core::Types;
 
 =attr memcached_servers (required)
 
-A comma-separated list of reachable memcached servers (can be either
-address:port or socket paths).
+An array (or a comma-separated list) of reachable memcached 
+servers (can be either address:port or socket paths).
 
 =cut
 
 has memcached_servers => (
     is       => 'ro',
-    isa      => Str,
+    isa      => $Servers,
     required => 1,
+    coerce   => $Servers->coercion,
 );
 
 #--------------------------------------------------------------------------#
@@ -38,30 +59,15 @@ has _memcached => (
     isa => InstanceOf ['Cache::Memcached'],
     handles => {
         _retrieve => 'get',
-        _flush => 'set',
-        _destroy => 'delete',
+        _flush    => 'set',
+        _destroy  => 'delete',
     },
 );
 
 # Adapted from Dancer::Session::Memcached
 sub _build__memcached {
     my ($self) = @_;
-
-    my $servers = $self->memcached_servers;
-
-    croak "The setting memcached_servers must be defined"
-      unless defined $servers;
-
-    $servers = [ split /,\s*/, $servers ];
-
-    # make sure the servers look good
-    foreach my $s (@$servers) {
-        if ( $s =~ /^\d+\.\d+\.\d+\.\d+$/ ) {
-            croak "server `$s' is invalid; port is missing, use `server:port'";
-        }
-    }
-
-    return Cache::Memcached->new( servers => $servers );
+    return Cache::Memcached->new( servers => $self->memcached_servers );
 }
 
 #--------------------------------------------------------------------------#
@@ -74,10 +80,7 @@ with 'Dancer2::Core::Role::SessionFactory';
 
 # memcached doesn't have any easy way to list keys it knows about
 # so we cheat and return an empty array ref
-sub _sessions {
-    my ($self) = @_;
-    return [];
-}
+sub _sessions { [] }
 
 sub _change_id {
     my ( $self, $old_id, $new_id ) = @_;
@@ -97,11 +100,14 @@ sub _change_id {
   engines:
     session:
       Memcached:
-        memcached_servers: 10.0.1.31:11211,10.0.1.32:11211,/var/sock/memcached
+        memcached_servers: 
+          - 10.0.1.31:11211
+          - 10.0.1.32:11211
+          - /var/sock/memcached
 
 =head1 DESCRIPTION
 
-This module implements a session factory for Dancer 2 that stores session
+This module implements a session factory for L<Dancer2> that stores session
 state within Memcached using L<Cache::Memcached>.
 
 =cut
