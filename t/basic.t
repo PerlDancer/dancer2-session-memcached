@@ -76,15 +76,21 @@ use Cache::Memcached;
     );
 }
 
-my $client = eval {
-    my $m = Cache::Memcached->new( servers => ["127.0.0.1:11211"] );
-    $m->set("hello", "world");
-    my $got = $m->get("hello") || '';
-    $got eq 'world' ? $m : undef;
-};
+my $client = Cache::Memcached->new( servers => ["127.0.0.1:11211"] );
 
-plan skip_all => "No memcached on localhost:11211"
-    unless $client;
+$client->set("hello", "world");
+
+unless ( $client->get('hello') eq 'world'  ) {
+    diag "no memcached server on localhost, will fake it";
+
+    my %cache;
+
+    no warnings 'redefine';
+
+    sub Cache::Memcached::get    { $cache{$_[1]} }
+    sub Cache::Memcached::set    { $cache{$_[1]} = $_[2] }
+    sub Cache::Memcached::delete { delete $cache{$_[1]} }
+}
 
 # make sure we clean up from prior runs
 $client->flush_all;
