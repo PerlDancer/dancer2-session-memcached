@@ -88,6 +88,12 @@ sub _change_id {
     $self->_destroy( $old_id );
 }
 
+# reject anything where the first two bytes are below \x20 once
+# Base64 decoded, ensuring Storable doesnt attempt to thaw such cruft.
+sub validate_id {
+    $_[1] =~ m/^[I-Za-z0-9_\-~][A-Za-z0-9_\-~]+$/;
+}
+
 1;
 
 =for Pod::Coverage method_names_here
