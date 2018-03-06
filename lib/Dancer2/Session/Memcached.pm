@@ -8,6 +8,7 @@ our $VERSION = '0.004';
 
 use Moo;
 use Cache::Memcached;
+use Carp qw/ croak /;
 
 use Types::Standard qw/ Str ArrayRef InstanceOf /;
 
@@ -50,6 +51,12 @@ has memcached_servers => (
     coerce   => $Servers->coercion,
 );
 
+has fatal_cluster_unreachable => (
+    is       => 'ro',
+    required => 0,
+    default  => sub { 0 },
+);
+
 #--------------------------------------------------------------------------#
 # Private attributes
 #--------------------------------------------------------------------------#
@@ -58,16 +65,47 @@ has _memcached => (
     is  => 'lazy',
     isa => InstanceOf ['Cache::Memcached'],
     handles => {
-        _retrieve => 'get',
-        _flush    => 'set',
         _destroy  => 'delete',
     },
 );
 
+sub _retrieve {
+    my ($self) = shift;
+
+    croak "Memcache cluster unreachable _retrieve"
+        if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
+
+    return $self->_memcached->get( @_ );
+}
+
+sub _flush {
+    my ($self) = shift;
+
+    croak "Memcache cluster unreachable _flush"
+        if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
+
+    return $self->_memcached->set( @_ );
+}
+
 # Adapted from Dancer::Session::Memcached
 sub _build__memcached {
     my ($self) = @_;
-    return Cache::Memcached->new( servers => $self->memcached_servers );
+
+    my $servers = $self->memcached_servers;
+
+    croak "The setting memcached_servers must be defined"
+      unless defined $servers;
+
+    $servers = [ split /,\s*/, $servers ];
+
+    # make sure the servers look good
+    foreach my $s (@$servers) {
+        if ( $s =~ /^\d+\.\d+\.\d+\.\d+$/ ) {
+            croak "server `$s' is invalid; port is missing, use `server:port'";
+        }
+    }
+
+    return Cache::Memcached->new( servers => $servers );
 }
 
 #--------------------------------------------------------------------------#
@@ -110,6 +148,7 @@ sub validate_id {
           - 10.0.1.31:11211
           - 10.0.1.32:11211
           - /var/sock/memcached
+        fatal_cluster_unreachable: 0
 
 =head1 DESCRIPTION
 
