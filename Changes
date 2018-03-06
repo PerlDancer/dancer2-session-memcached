@@ -1,6 +1,9 @@
 Revision history for Dancer2-Session-Memcached
 
 {{$NEXT}}
+  [ ENHANCEMENTS]
+  - Optionnal croaking on cluster unreachable. [GH#4, pierre-vigier]
+
   [ BUG FIXES ]
   - Validate session ids before passing to Storable. [GH#5, veryrusty]
 
