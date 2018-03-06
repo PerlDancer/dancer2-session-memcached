@@ -1,17 +1,14 @@
 Revision history for Dancer2-Session-Memcached
 
-{{$NEXT}}
-  [ ENHANCEMENTS]
-  - Optionnal croaking on cluster unreachable. [GH#4, pierre-vigier]
-
+0.006 2018-03-06
   [ BUG FIXES ]
-  - Validate session ids before passing to Storable. [GH#5, veryrusty]
+    - Validate session ids before passing to Storable. [GH#5, veryrusty]
 
-  [ DOCUMENTATION ]
-
-  [ NEW FEATURES ]
+  [ ENHANCEMENTS ]
+    - Optionnal croaking on cluster unreachable. [GH#4, pierre-vigier]
 
   [ STATISTICS ]
+    - code churn: 3 files changed, 66 insertions(+), 6 deletions(-)
 
 0.005 2016-11-05
   - tests are run even if memcached server is present on local host.
@@ -20,8 +17,6 @@ Revision history for Dancer2-Session-Memcached
 
   [ STATISTICS ]
     - code churn: 4 files changed, 96 insertions(+), 38 deletions(-)
-
-
 
 0.004 2016-07-07
   - Bump Dancer2 dependency to 0.150000 (Core::Context removal)

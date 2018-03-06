@@ -2,8 +2,9 @@ use strict;
 use warnings;
 
 package Dancer2::Session::Memcached;
+our $AUTHORITY = 'cpan:YANICK';
 # ABSTRACT: Dancer 2 session storage with Cache::Memcached
-
+$Dancer2::Session::Memcached::VERSION = '0.006';
 use Moo;
 use Cache::Memcached;
 use Carp qw/ croak /;
@@ -35,12 +36,6 @@ my $Servers = Type::Tiny->new(
 # Public attributes
 #--------------------------------------------------------------------------#
 
-=attr memcached_servers (required)
-
-An array (or a comma-separated list) of reachable memcached 
-servers (can be either address:port or socket paths).
-
-=cut
 
 has memcached_servers => (
     is       => 'ro',
@@ -132,7 +127,22 @@ sub validate_id {
 
 1;
 
-=for Pod::Coverage method_names_here
+
+# vim: ts=4 sts=4 sw=4 et:
+
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+Dancer2::Session::Memcached - Dancer 2 session storage with Cache::Memcached
+
+=head1 VERSION
+
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -153,6 +163,25 @@ sub validate_id {
 This module implements a session factory for L<Dancer2> that stores session
 state within Memcached using L<Cache::Memcached>.
 
-=cut
+=head1 ATTRIBUTES
 
-# vim: ts=4 sts=4 sw=4 et:
+=head2 memcached_servers (required)
+
+An array (or a comma-separated list) of reachable memcached 
+servers (can be either address:port or socket paths).
+
+=for Pod::Coverage method_names_here
+
+=head1 AUTHOR
+
+David Golden <dagolden@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2018, 2016 by David Golden.
+
+This is free software, licensed under:
+
+  The Apache License, Version 2.0, January 2004
+
+=cut
