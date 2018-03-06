@@ -8,6 +8,7 @@ our $VERSION = '0.004';
 
 use Moo;
 use Cache::Memcached;
+use Carp qw/ croak /;
 
 use Types::Standard qw/ Str ArrayRef InstanceOf /;
 
@@ -52,7 +53,6 @@ has memcached_servers => (
 
 has fatal_cluster_unreachable => (
     is       => 'ro',
-    isa      => Bool,
     required => 0,
     default  => sub { 0 },
 );
@@ -65,8 +65,6 @@ has _memcached => (
     is  => 'lazy',
     isa => InstanceOf ['Cache::Memcached'],
     handles => {
-        _retrieve => 'get',
-        _flush    => 'set',
         _destroy  => 'delete',
     },
 );
