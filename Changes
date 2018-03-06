@@ -1,6 +1,8 @@
 Revision history for Dancer2-Session-Memcached
 
 {{$NEXT}}
+  [ BUG FIXES ]
+  - Validate session ids before passing to Storable. [GH#5, veryrusty]
 
 0.005 2016-11-05
   - tests are run even if memcached server is present on local host.
