@@ -91,21 +91,7 @@ sub _flush {
 sub _build__memcached {
     my ($self) = @_;
 
-    my $servers = $self->memcached_servers;
-
-    croak "The setting memcached_servers must be defined"
-      unless defined $servers;
-
-    $servers = [ split /,\s*/, $servers ];
-
-    # make sure the servers look good
-    foreach my $s (@$servers) {
-        if ( $s =~ /^\d+\.\d+\.\d+\.\d+$/ ) {
-            croak "server `$s' is invalid; port is missing, use `server:port'";
-        }
-    }
-
-    return Cache::Memcached->new( servers => $servers );
+    return Cache::Memcached->new( servers => $self->memcached_servers );
 }
 
 #--------------------------------------------------------------------------#
