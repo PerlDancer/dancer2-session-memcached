@@ -4,6 +4,8 @@ Revision history for Dancer2-Session-Memcached
   [ API CHANGES ]
 
   [ BUG FIXES ]
+  - Builder for memcache server was trying to coerce
+    the already-coerced values. [GH#6, pierre-vigier]
 
   [ DOCUMENTATION ]
 
