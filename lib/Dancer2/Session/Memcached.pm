@@ -82,6 +82,9 @@ sub _flush {
     croak "Memcache cluster unreachable _flush"
         if $self->fatal_cluster_unreachable && not keys %{$self->_memcached->stats(['misc'])};
 
+    # append session_duration if set
+    push @_, $self->session_duration if $self->session_duration and $#_ < 2;
+
     return $self->_memcached->set( @_ );
 }
 
