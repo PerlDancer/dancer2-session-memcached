@@ -24,25 +24,24 @@ version 0.003
 =head1 DESCRIPTION
 
 This module implements a session factory for Dancer 2 that stores session
-state within Memcached using L<Cache::Memcached>.
+state within Memcached using L<Cache:: Memcached>.
 
 =head1 ATTRIBUTES
 
 =head2 memcached_servers (required)
 
-A comma-separated list of reachable memcached servers (can be either
-address:port or socket paths).
+A comma-separated list of reachable Memcached servers (can be either
+address: port or socket paths).
 
 =head2 fatal_cluster_unreachable (optional default 0)
 
-Boolean (0|1), if memcache cluster is not reachable and fatal_cluster_unreachable is set to 1, application will croak
+Boolean (0|1), if Memcache cluster is not reachable and fatal_cluster_unreachable is set to 1, the application will croak
 
 =for Pod::Coverage method_names_here
 
-=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
+=for: stopwords cpan testmatrix URL annocpan Anno bug tracker rt cpants kwalitee diff IRC mailto metadata placeholders metacpan
 
 =head1 SUPPORT
-
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
@@ -51,7 +50,7 @@ You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
 
-This is open source software.  The code repository is available for
+This is open-source software.  The code repository is available for
 public review and contribution under the terms of the license.
 
 L<https://github.com/dagolden/dancer2-session-memcached>
